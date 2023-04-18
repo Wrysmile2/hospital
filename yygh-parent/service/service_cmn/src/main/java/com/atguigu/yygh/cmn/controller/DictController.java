@@ -6,8 +6,10 @@ import com.atguigu.yygh.model.cmn.Dict;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Api("数据字典接口")
@@ -19,10 +21,24 @@ public class DictController {
     @Resource
     private DictService dictService;
 
+    //导入数据字典接口
+    @ApiOperation(value = "导入")
+    @PostMapping("/importData")
+    public Result importData(MultipartFile file){
+        dictService.importDictData(file);
+        return Result.ok();
+    }
+
+    //导出数据字典接口
+    @GetMapping("/exportData")
+    public void exportData(HttpServletResponse response){
+        dictService.exportDictData(response);
+    }
+
     //根据数据id查询子数据列表
     @ApiOperation("根据数据id查询子数据列表")
     @GetMapping("/findChildData/{id}")
-    private Result findChildData(@PathVariable Long id){
+    public Result findChildData(@PathVariable Long id){
         List<Dict> list = dictService.findChildData(id);
         return Result.ok(list);
     }
