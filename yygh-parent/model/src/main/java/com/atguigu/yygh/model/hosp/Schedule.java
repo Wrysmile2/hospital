@@ -1,11 +1,15 @@
 package com.atguigu.yygh.model.hosp;
 
+import com.atguigu.yygh.model.base.BaseEntity;
 import com.atguigu.yygh.model.base.BaseMongoEntity;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.stereotype.Indexed;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,17 +23,17 @@ import java.util.Date;
  */
 @Data
 @ApiModel(description = "Schedule")
-//@Document("Schedule")
+@Document("Schedule")
 public class Schedule extends BaseMongoEntity {
 	
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "医院编号")
-//	@Indexed //普通索引
+	@Indexed //普通索引
 	private String hoscode;
 
 	@ApiModelProperty(value = "科室编号")
-//	@Indexed //普通索引
+	@Indexed //普通索引
 	private String depcode;
 
 	@ApiModelProperty(value = "职称")
@@ -61,7 +65,7 @@ public class Schedule extends BaseMongoEntity {
 	private Integer status;
 
 	@ApiModelProperty(value = "排班编号（医院自己的排班主键）")
-//	@Indexed //普通索引
+	@Indexed //普通索引
 	private String hosScheduleId;
 
 }

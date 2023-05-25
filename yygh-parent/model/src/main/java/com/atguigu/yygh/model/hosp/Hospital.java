@@ -1,11 +1,15 @@
 package com.atguigu.yygh.model.hosp;
 
 import com.alibaba.fastjson.JSONObject;
+import com.atguigu.yygh.model.base.BaseEntity;
 import com.atguigu.yygh.model.base.BaseMongoEntity;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.stereotype.Indexed;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * <p>
@@ -16,17 +20,17 @@ import org.springframework.stereotype.Indexed;
  */
 @Data
 @ApiModel(description = "Hospital")
-//@Document("Hospital")
+@Document("Hospital")
 public class Hospital extends BaseMongoEntity {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "医院编号")
-//	@Indexed(unique = true) //唯一索引
+	@Indexed(unique = true) //唯一索引
 	private String hoscode;
 
 	@ApiModelProperty(value = "医院名称")
-//	@Indexed //普通索引
+	@Indexed //普通索引
 	private String hosname;
 
 	@ApiModelProperty(value = "医院类型")
