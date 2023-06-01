@@ -8,11 +8,13 @@ import com.atguigu.yygh.common.utils.MD5;
 import com.atguigu.yygh.hospital.service.DepartmentService;
 import com.atguigu.yygh.hospital.service.HospitalService;
 import com.atguigu.yygh.hospital.service.HospitalSetService;
+import com.atguigu.yygh.hospital.service.ScheduleService;
 import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.model.hosp.Schedule;
 import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;
 import com.atguigu.yygh.vo.hosp.ScheduleQueryVo;
+import javafx.concurrent.ScheduledService;
 import org.springframework.data.domain.Page;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,8 +38,11 @@ public class ApiController {
     @Resource
     private DepartmentService departmentService;
 
+    @Resource
+    private ScheduleService scheduleService;
+
     //删除排班
-    /*@PostMapping("schedule/remove")
+    @PostMapping("schedule/remove")
     public Result remove(HttpServletRequest request) {
         //获取传递过来科室信息
         Map<String, String[]> requestMap = request.getParameterMap();
@@ -50,10 +55,10 @@ public class ApiController {
 
         scheduleService.remove(hoscode,hosScheduleId);
         return Result.ok();
-    }*/
+    }
 
     //查询排班接口
-    /*@PostMapping("schedule/list")
+    @PostMapping("schedule/list")
     public Result findSchedule(HttpServletRequest request) {
         //获取传递过来科室信息
         Map<String, String[]> requestMap = request.getParameterMap();
@@ -75,10 +80,10 @@ public class ApiController {
         //调用service方法
         Page<Schedule> pageModel = scheduleService.findPageSchedule(page,limit,scheduleQueryVo);
         return Result.ok(pageModel);
-    }*/
+    }
 
     //上传排班接口
-    /*@PostMapping("saveSchedule")
+    @PostMapping("saveSchedule")
     public Result saveSchedule(HttpServletRequest request) {
         //获取传递过来科室信息
         Map<String, String[]> requestMap = request.getParameterMap();
@@ -87,7 +92,7 @@ public class ApiController {
         //TODO 签名校验
         scheduleService.save(paramMap);
         return Result.ok();
-    }*/
+    }
 
     //删除科室接口
     @PostMapping("/department/remove")
